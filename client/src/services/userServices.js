@@ -20,6 +20,8 @@ export const getCurrentUser = () => {
   }
 };
 
+export const sendContact = (data) => http.post(`${apiUrl}user/contact`, data);
+
 export const logout = () => {
   localStorage.removeItem("token");
   return (window.location = "/");
