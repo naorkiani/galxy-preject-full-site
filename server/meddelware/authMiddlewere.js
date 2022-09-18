@@ -1,4 +1,4 @@
-const { FaUser } = require("react-icons/fa");
+
 const jwt = require("../config/jwt");
 const { user } = require("../model/userModel");
 
