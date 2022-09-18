@@ -11,7 +11,7 @@ router.get("/cards", async (req, res) => {
     const cards = await Card.find();
     return res.send(cards);
   } catch (error) {
-    console.log(chalk.redBright(error.message));
+    console.log(error.message);
     return res.status(500).send(error.message);
   }
 });
@@ -32,7 +32,7 @@ router.get("/card/:id", async (req, res) => {
     const card = await Card.findOne({ _id: cardID });
     return res.send(card);
   } catch (error) {
-    console.log(chalk.redBright(error.message));
+    console.log(error.message);
     return res.status(500).send(error.message);
   }
 });
@@ -44,7 +44,7 @@ router.get("/my-cards", auth, async (req, res) => {
     const cards = await Card.find({ user_id: user._id });
     return res.send(cards);
   } catch (error) {
-    console.log(chalk.redBright(error.message));
+    console.log(error.message);
     return res.status(500).send(error.message);
   }
 });
@@ -55,7 +55,7 @@ router.post("/", auth, async (req, res) => {
 
     if (!user) {
       console.log(
-        chalk.redBright("A non biz user attempted to create a card!")
+        "A non biz user attempted to create a card!"
       );
       return res.status(403).json("Un authorize user!");
     }
@@ -64,7 +64,7 @@ router.post("/", auth, async (req, res) => {
 
     const { error } = validateCard(card);
     if (error) {
-      console.log(chalk.redBright(error.details[0].message));
+      console.log(error.details[0].message);
       return res.status(400).send(error.details[0].message);
     }
 
@@ -105,7 +105,7 @@ router.post("/", auth, async (req, res) => {
     await newCard.save();
     return res.send(card);
   } catch (error) {
-    console.log(chalk.redBright(error.message));
+    console.log(error.message);
     return res.status(500).send(error);
   }
 });
@@ -126,7 +126,7 @@ router.put("/:id", auth, async (req, res) => {
     const { error } = validateCard(card);
     if (error) {
       const errorMessage = error.details[0].message;
-      console.log(chalk.redBright(errorMessage));
+      console.log(errorMessage);
       return res.status(400).send(errorMessage);
     }
 
@@ -150,13 +150,13 @@ router.put("/:id", auth, async (req, res) => {
 
     card = await Card.findOneAndUpdate(filter, card);
     if (!card) {
-      console.log(chalk.redBright("No card with this ID in the database!"));
+      console.log("No card with this ID in the database!");
       return res.status(404).send("No card with this ID in the database!");
     }
     card = await Card.findById(card._id);
     return res.send(card);
   } catch (error) {
-    console.log(chalk.redBright(error.message));
+    console.log(error.message);
     return res.status(500).send(error.message);
   }
 });
@@ -182,13 +182,13 @@ router.delete("/:id", auth, async (req, res) => {
     });
 
     if (!card) {
-      console.log(chalk.redBright("Un authorized user!"));
+      console.log("Un authorized user!");
       return res.status(403).send("You are noe authorize to delete cards");
     }
 
     return res.send(card);
   } catch (error) {
-    console.log(chalk.redBright("Could not delet card:", error.message));
+    console.log("Could not delet card:", error.message);
     return res.status(500).send(error.message);
   }
 });
