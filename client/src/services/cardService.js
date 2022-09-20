@@ -1,7 +1,7 @@
 import http from "./httpService";
 import axios from "axios";
 
-const apiUrl = "http://localhost:8181";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 axios.defaults.headers.common["token"] = localStorage.getItem("token");
 
