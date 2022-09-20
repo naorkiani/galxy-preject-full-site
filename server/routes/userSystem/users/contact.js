@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Contact } = require("../../../model/ContactModel");
+const Contact = require("../../../model/ContactModel");
 const validCon = require("../../../validation/contact-usValid");
 router.post("/", async (req, res) => {
   try {
