@@ -35,7 +35,7 @@ class Contact extends Form {
       // toast.success(`${user.name} you signup successfully`);
       delete data.userName;
 
-      //window.location = "/";
+      window.location = "/";
     } catch (error) {
       console.log(error);
       if (error.response && error.response.status === 400)
